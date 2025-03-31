@@ -31,17 +31,23 @@ Tabzy.prototype._setActiveTab = function (tabActive) {
     const panelActive = document.querySelector(tabActive.getAttribute("href"));
     // Hiển thị panel tương ứng
     panelActive.hidden = false;
-    localStorage.setItem("tabActive", tabActive.getAttribute("href"));
+    if (this.options.remberTab) {
+        const params = new URLSearchParams(window.location.search);
+        params.set("active_tab", tabActive.getAttribute("href").split("#")[1]);
+        window.history.pushState({}, "", "?" + params.toString());
+    }
 };
 
 Tabzy.prototype._init = function () {
     let tabActive = this.tabs[0];
-    const idTabActiveLocal = localStorage.getItem("tabActive");
-    if (idTabActiveLocal) {
-        const tabActiveLocal = this.tabs.find(
-            (tab) => tab.getAttribute("href") === idTabActiveLocal
+
+    if (this.options.remberTab) {
+        const params = new URLSearchParams(window.location.search);
+        const activeTabName = params.get("active_tab");
+        const tabActiveFound = this.tabs.find(
+            (tab) => tab.getAttribute("href") === `#${activeTabName}`
         );
-        if (tabActiveLocal) tabActive = tabActiveLocal;
+        if (tabActiveFound) tabActive = tabActiveFound;
     }
 
     this._setActiveTab(tabActive);
