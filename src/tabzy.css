@@ -1,4 +1,48 @@
-.tabzy--active a {
-    color: red;
-    font-weight: 600;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f0f0f0;
+}
+
+.tabzy {
+    position: relative;
+}
+
+.tabzy__tabs {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tabzy__link {
+    text-decoration: none;
+    color: #555;
+    padding: 10px 20px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.tabzy--active .tabzy__link {
+    color: #1ca595;
+}
+
+.tabzy__link:hover {
+    color: #1ca595;
+}
+
+.tabzy__line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: #1ca595;
+    transition: width 0.3s ease, left 0.3s ease;
 }

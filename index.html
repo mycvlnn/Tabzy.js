@@ -7,62 +7,36 @@
         <link rel="stylesheet" href="./src/tabzy.css" />
     </head>
     <body>
-        <ul id="tabs">
-            <li>
-                <a href="#tab1">Tab 1</a>
-            </li>
-            <li>
-                <a href="#tab2">Tab 2</a>
-            </li>
-            <li>
-                <a href="#tab3">Tab 3</a>
-            </li>
-        </ul>
+        <div class="tabzy">
+            <ul id="tabs" class="tabzy__tabs">
+                <li class="tabzy__tab">
+                    <a href="#tab1" class="tabzy__link">Mart</a>
+                </li>
+                <li class="tabzy__tab">
+                    <a href="#tab2" class="tabzy__link">Restaurant</a>
+                </li>
+                <li class="tabzy__tab">
+                    <a href="#tab3" class="tabzy__link">Medical</a>
+                </li>
+            </ul>
+            <div class="tabzy__line"></div>
+        </div>
 
         <div id="tab1">
-            <h2>Tab 1</h2>
+            <h2>Mart</h2>
             <p>Tab 1 content</p>
         </div>
 
         <div id="tab2">
-            <h2>Tab 2</h2>
+            <h2>Restaurant</h2>
             <p>Tab 2 content</p>
         </div>
 
         <div id="tab3">
-            <h2>Tab 3</h2>
+            <h2>Medical</h2>
             <p>Tab 3 content</p>
         </div>
 
-        <hr />
-
-        <!-- Tab 2 -->
-        <ul id="tabs2">
-            <li>
-                <a href="#tabA">Tab A</a>
-            </li>
-            <li>
-                <a href="#tabB">Tab B</a>
-            </li>
-            <li>
-                <a href="#tabC">Tab C</a>
-            </li>
-        </ul>
-
-        <div id="tabA">
-            <h2>Tab A</h2>
-            <p>Tab A content</p>
-        </div>
-
-        <div id="tabB">
-            <h2>Tab B</h2>
-            <p>Tab B content</p>
-        </div>
-
-        <div id="tabC">
-            <h2>Tab C</h2>
-            <p>Tab C content</p>
-        </div>
         <script src="./src/tabzy.js"></script>
     </body>
 </html>

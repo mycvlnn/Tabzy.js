@@ -4,13 +4,13 @@ Tabzy.prototype.destroy = function () {
     this.panels.forEach((panel) => (panel.hidden = false));
     this.panels = null;
     this.tabs = null;
-    this.original = null;
+    this.currentTab = null;
 };
 
 Tabzy.prototype._tryActiveTab = function (tabActive) {
-    if (this._currentTab !== tabActive) {
+    if (this.currentTab !== tabActive) {
+        this.currentTab = tabActive;
         this._setActiveTab(tabActive);
-        this._currentTab = tabActive;
     }
 };
 
@@ -35,7 +35,11 @@ Tabzy.prototype._handleChangeQueryParam = function (tabActive) {
     window.history.pushState({}, "", "?" + params.toString());
 };
 
-Tabzy.prototype._setActiveTab = function (tabActive, triggerOnChange = true) {
+Tabzy.prototype._setActiveTab = function (
+    tabActive,
+    triggerOnChange = true,
+    triggerQueryParam = true
+) {
     // Xoá bỏ style của các class li
     this.tabs.forEach((tab) => tab.closest("li").classList.remove(this.options.activeClassName));
     // Thêm class active cho tab hiện tại
@@ -46,12 +50,15 @@ Tabzy.prototype._setActiveTab = function (tabActive, triggerOnChange = true) {
     // Hiển thị panel tương ứng
     panelActive.hidden = false;
 
-    if (this.options.remberTab) {
+    if (this.options.remberTab && triggerQueryParam) {
         this._handleChangeQueryParam(tabActive);
     }
 
     if (this.options.onChange && triggerOnChange) {
-        this.options.onChange(tabActive, panelActive);
+        this.options.onChange({
+            tab: tabActive,
+            panel: panelActive,
+        });
     }
 };
 
@@ -66,8 +73,8 @@ Tabzy.prototype._getTabActiveFromURL = function () {
 
 Tabzy.prototype._init = function () {
     const tabActive = (this.options.remberTab && this._getTabActiveFromURL()) || this.tabs[0];
-    this._currentTab = tabActive;
-    this._setActiveTab(tabActive, false);
+    this.currentTab = tabActive;
+    this._setActiveTab(tabActive, false, false);
 
     // Add events
     this.tabs.forEach((tab) => {
@@ -130,10 +137,14 @@ function Tabzy(selector, options) {
 
 const tabzy = new Tabzy("tabs", {
     remberTab: true,
-    onChange: (tab, panel) => {
-        console.log("Tab changed:", tab);
-        console.log("Panel changed:", panel);
-    },
+    onChange: slideLine,
 });
 
-const tabzy2 = new Tabzy("tabs2");
+function slideLine() {
+    const currentTabActive = tabzy.currentTab;
+    const tabLine = tabzy.container.nextElementSibling;
+    tabLine.style.width = currentTabActive.offsetWidth + "px";
+    tabLine.style.left = currentTabActive.offsetLeft + "px";
+}
+
+slideLine();
