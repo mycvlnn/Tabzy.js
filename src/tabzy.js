@@ -33,7 +33,7 @@ Tabzy.prototype._setActiveTab = function (tabActive) {
     panelActive.hidden = false;
     if (this.options.remberTab) {
         const params = new URLSearchParams(window.location.search);
-        params.set(this.options.queryActiveKey, tabActive.getAttribute("href").split("#")[1]);
+        params.set(this.selector, tabActive.getAttribute("href").split("#")[1]);
         window.history.pushState({}, "", "?" + params.toString());
     }
 };
@@ -43,7 +43,7 @@ Tabzy.prototype._init = function () {
 
     if (this.options.remberTab) {
         const params = new URLSearchParams(window.location.search);
-        const activeTabName = params.get(this.options.queryActiveKey);
+        const activeTabName = params.get(this.selector);
         const tabActiveFound = this.tabs.find(
             (tab) => tab.getAttribute("href") === `#${activeTabName}`
         );
@@ -102,10 +102,8 @@ function Tabzy(selector, options) {
 
 const tabzy = new Tabzy("tabs", {
     remberTab: true,
-    queryActiveKey: "active_key",
 });
 
 const tabzy2 = new Tabzy("tabs2", {
     remberTab: true,
-    queryActiveKey: "tab_active",
 });
