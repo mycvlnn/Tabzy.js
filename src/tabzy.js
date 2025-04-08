@@ -28,20 +28,26 @@ Tabzy.prototype.switchTab = function (target) {
     this._tryActiveTab(tabActive);
 };
 
+Tabzy.prototype._handleChangeQueryParam = function (tabActive) {
+    const params = new URLSearchParams(window.location.search);
+    const value = tabActive.getAttribute("href").split("#")[1];
+    params.set(this.selector, value);
+    window.history.pushState({}, "", "?" + params.toString());
+};
+
 Tabzy.prototype._setActiveTab = function (tabActive, triggerOnChange = true) {
     // Xoá bỏ style của các class li
-    this.tabs.forEach((tab) => tab.closest("li").classList.remove("tabzy--active"));
+    this.tabs.forEach((tab) => tab.closest("li").classList.remove(this.options.activeClassName));
     // Thêm class active cho tab hiện tại
-    tabActive.closest("li").classList.add("tabzy--active");
+    tabActive.closest("li").classList.add(this.options.activeClassName);
     // Ẩn các panel đi
     this.panels.forEach((panel) => (panel.hidden = true));
     const panelActive = document.querySelector(tabActive.getAttribute("href"));
     // Hiển thị panel tương ứng
     panelActive.hidden = false;
+
     if (this.options.remberTab) {
-        const params = new URLSearchParams(window.location.search);
-        params.set(this.selector, tabActive.getAttribute("href").split("#")[1]);
-        window.history.pushState({}, "", "?" + params.toString());
+        this._handleChangeQueryParam(tabActive);
     }
 
     if (this.options.onChange && triggerOnChange) {
@@ -49,30 +55,41 @@ Tabzy.prototype._setActiveTab = function (tabActive, triggerOnChange = true) {
     }
 };
 
+Tabzy.prototype._getTabActiveFromURL = function () {
+    const params = new URLSearchParams(window.location.search);
+    const activeTabName = params.get(this.selector);
+    const tabActiveFound = this.tabs.find(
+        (tab) => tab.getAttribute("href") === `#${activeTabName}`
+    );
+    return tabActiveFound;
+};
+
 Tabzy.prototype._init = function () {
-    let tabActive = this.tabs[0];
-
-    if (this.options.remberTab) {
-        const params = new URLSearchParams(window.location.search);
-        const activeTabName = params.get(this.selector);
-        const tabActiveFound = this.tabs.find(
-            (tab) => tab.getAttribute("href") === `#${activeTabName}`
-        );
-        if (tabActiveFound) tabActive = tabActiveFound;
-    }
-
+    const tabActive = (this.options.remberTab && this._getTabActiveFromURL()) || this.tabs[0];
     this._currentTab = tabActive;
     this._setActiveTab(tabActive, false);
 
     // Add events
     this.tabs.forEach((tab) => {
-        tab.onclick = (event) => this._handleTabClick(event, tab);
+        tab.onclick = (event) => {
+            event.preventDefault();
+            this._tryActiveTab(tab);
+        };
     });
 };
 
-Tabzy.prototype._handleTabClick = function (event, tabActive) {
-    event.preventDefault();
-    this._tryActiveTab(tabActive);
+Tabzy.prototype._getPanels = function () {
+    return this.tabs
+        .map((tab) => {
+            const panel = document.querySelector(tab.getAttribute("href"));
+            if (!panel) {
+                console.error(`Panel with selector ${tab.getAttribute("href")} not found`);
+                return;
+            }
+
+            return panel;
+        })
+        .filter(Boolean);
 };
 
 function Tabzy(selector, options) {
@@ -81,6 +98,7 @@ function Tabzy(selector, options) {
         {
             remberTab: false,
             onChange: null,
+            activeClassName: "tabzy--active",
         },
         options
     );
@@ -100,17 +118,7 @@ function Tabzy(selector, options) {
         return;
     }
 
-    this.panels = this.tabs
-        .map((tab) => {
-            const panel = document.querySelector(tab.getAttribute("href"));
-            if (!panel) {
-                console.error(`Panel with selector ${tab.getAttribute("href")} not found`);
-                return;
-            }
-
-            return panel;
-        })
-        .filter(Boolean);
+    this.panels = this._getPanels();
 
     if (this.panels.length !== this.tabs.length) {
         console.error("Number of tabs and panels do not match");
