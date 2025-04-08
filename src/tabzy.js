@@ -7,6 +7,13 @@ Tabzy.prototype.destroy = function () {
     this.original = null;
 };
 
+Tabzy.prototype._tryActiveTab = function (tabActive) {
+    if (this._currentTab !== tabActive) {
+        this._setActiveTab(tabActive);
+        this._currentTab = tabActive;
+    }
+};
+
 Tabzy.prototype.switchTab = function (target) {
     let tabActive = null;
     if (typeof target === "string") {
@@ -18,10 +25,10 @@ Tabzy.prototype.switchTab = function (target) {
         return;
     }
 
-    this._setActiveTab(tabActive);
+    this._tryActiveTab(tabActive);
 };
 
-Tabzy.prototype._setActiveTab = function (tabActive) {
+Tabzy.prototype._setActiveTab = function (tabActive, triggerOnChange = true) {
     // Xoá bỏ style của các class li
     this.tabs.forEach((tab) => tab.closest("li").classList.remove("tabzy--active"));
     // Thêm class active cho tab hiện tại
@@ -35,6 +42,10 @@ Tabzy.prototype._setActiveTab = function (tabActive) {
         const params = new URLSearchParams(window.location.search);
         params.set(this.selector, tabActive.getAttribute("href").split("#")[1]);
         window.history.pushState({}, "", "?" + params.toString());
+    }
+
+    if (this.options.onChange && triggerOnChange) {
+        this.options.onChange(tabActive, panelActive);
     }
 };
 
@@ -50,7 +61,9 @@ Tabzy.prototype._init = function () {
         if (tabActiveFound) tabActive = tabActiveFound;
     }
 
-    this._setActiveTab(tabActive);
+    this._currentTab = tabActive;
+    this._setActiveTab(tabActive, false);
+
     // Add events
     this.tabs.forEach((tab) => {
         tab.onclick = (event) => this._handleTabClick(event, tab);
@@ -59,12 +72,19 @@ Tabzy.prototype._init = function () {
 
 Tabzy.prototype._handleTabClick = function (event, tabActive) {
     event.preventDefault();
-    this._setActiveTab(tabActive);
+    this._tryActiveTab(tabActive);
 };
 
 function Tabzy(selector, options) {
     this.selector = selector;
-    this.options = options ?? {};
+    this.options = Object.assign(
+        {
+            remberTab: false,
+            onChange: null,
+        },
+        options
+    );
+
     this.container = document.getElementById(this.selector);
     if (!this.container) {
         console.error(`Element with selector ${this.selector} not found`);
@@ -102,8 +122,10 @@ function Tabzy(selector, options) {
 
 const tabzy = new Tabzy("tabs", {
     remberTab: true,
+    onChange: (tab, panel) => {
+        console.log("Tab changed:", tab);
+        console.log("Panel changed:", panel);
+    },
 });
 
-const tabzy2 = new Tabzy("tabs2", {
-    remberTab: true,
-});
+const tabzy2 = new Tabzy("tabs2");
