@@ -2,41 +2,362 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <title>Tabzy.js: A Lightweight Vanilla JavaScript Tab Library</title>
+        <meta
+            name="description"
+            content="Tabzy.js is a lightweight and simple tab library written in pure JavaScript. It is designed for great user experience (no dependencies, fully customizable, supports URL state persistence)."
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Tabzy</title>
-        <link rel="stylesheet" href="./src/tabzy.css" />
+        <link rel="stylesheet" href="./assets/highlight/styles.css" media="all" />
+        <link rel="stylesheet" href="./assets/styles.css" media="all" />
+        <link rel="stylesheet" href="./assets/index.css" />
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     </head>
     <body>
-        <div class="tabzy">
-            <ul id="tabs" class="tabzy__tabs">
-                <li class="tabzy__tab">
-                    <a href="#tab1" class="tabzy__link">Mart</a>
-                </li>
-                <li class="tabzy__tab">
-                    <a href="#tab2" class="tabzy__link">Restaurant</a>
-                </li>
-                <li class="tabzy__tab">
-                    <a href="#tab3" class="tabzy__link">Medical</a>
-                </li>
+        <!-- HEADER -->
+        <header class="header">
+            <div class="container">
+                <h1 class="header__title">Tabzy.js</h1>
+                <div class="header__tagline">
+                    A lightweight and simple tab library built with pure JavaScript.
+                </div>
+                <a href="https://github.com/mycvlnn/Tabzy.js" class="header__github" target="_blank"
+                    ><img src="./assets/github.svg" alt="View on GitHub"
+                /></a>
+            </div>
+        </header>
+        <!-- /HEADER -->
+
+        <!-- CONTAINER -->
+        <div class="container content">
+            <h2 data-bullet="1" class="title" id="try-it-out">Try It Out</h2>
+            <p>
+                Tabzy is a lightweight <strong>tab library</strong> built with pure JavaScript. (<a
+                    target="_blank"
+                    href="https://github.com/mycvlnn/Tabzy.js"
+                    >Source code available on GitHub</a
+                >)
+            </p>
+
+            <ul>
+                <li>No dependencies</li>
+                <li>Fully customizable with CSS</li>
+                <li>Supports URL state persistence</li>
+                <li>Simple and intuitive API</li>
+                <li>Lightweight and optimized</li>
             </ul>
-            <div class="tabzy__line"></div>
-        </div>
 
-        <div id="tab1">
-            <h2>Mart</h2>
-            <p>Tab 1 content</p>
-        </div>
+            <p>Here are some examples of how to use Tabzy:</p>
 
-        <div id="tab2">
-            <h2>Restaurant</h2>
-            <p>Tab 2 content</p>
-        </div>
+            <!-- Sample 1 -->
+            <p><strong>1. Basic Tabs Demo</strong></p>
 
-        <div id="tab3">
-            <h2>Medical</h2>
-            <p>Tab 3 content</p>
-        </div>
+            <div class="sample-1">
+                <ul id="fancy-tabs" class="tabzy-tabs">
+                    <li><a href="#fancy1">Tab 1</a></li>
+                    <li><a href="#fancy2">Tab 2</a></li>
+                    <li><a href="#fancy3">Tab 3</a></li>
+                    <li><a href="#fancy4">Tab 4</a></li>
+                </ul>
+                <div id="fancy1" class="tabzy-panel">Welcome to Tab 1! This is the first tab.</div>
+                <div id="fancy2" class="tabzy-panel" hidden>
+                    Here’s Tab 2 with some cool content.
+                </div>
+                <div id="fancy3" class="tabzy-panel" hidden>Tab 3 is here for you to explore.</div>
+                <div id="fancy4" class="tabzy-panel" hidden>Tab 4 has some unique info.</div>
+            </div>
 
+            <!-- Sample 2 -->
+            <p><strong>2. Persistent Tabs Demo</strong></p>
+
+            <div class="sample-2">
+                <ul id="persistent-tabs" class="tabzy-tabs">
+                    <li><a href="#persist1">News</a></li>
+                    <li><a href="#persist2">Sports</a></li>
+                    <li><a href="#persist3">Tech</a></li>
+                    <li><a href="#persist4">Lifestyle</a></li>
+                </ul>
+                <div id="persist1" class="tabzy-panel">
+                    Latest news updates from around the world.
+                </div>
+                <div id="persist2" class="tabzy-panel" hidden>
+                    Top sports highlights and scores.
+                </div>
+                <div id="persist3" class="tabzy-panel" hidden>Latest trends in technology.</div>
+                <div id="persist4" class="tabzy-panel" hidden>Tips for a better lifestyle.</div>
+            </div>
+
+            <!-- Sample 3 -->
+            <p><strong>3. Sliding Line Tabs Demo</strong></p>
+
+            <div class="sample-3">
+                <div class="tabzy-wrapper">
+                    <ul id="sliding-tabs" class="tabzy-tabs sliding">
+                        <li><a href="#slide1">Home</a></li>
+                        <li><a href="#slide2">About</a></li>
+                        <li><a href="#slide3">Services</a></li>
+                        <li><a href="#slide4">Portfolio</a></li>
+                    </ul>
+                    <div class="active-line"></div>
+                </div>
+                <div id="slide1" class="tabzy-panel">Welcome to the Home tab!</div>
+                <div id="slide2" class="tabzy-panel" hidden>About us and our mission.</div>
+                <div id="slide3" class="tabzy-panel" hidden>Our services in detail.</div>
+                <div id="slide4" class="tabzy-panel" hidden>Check out our portfolio.</div>
+            </div>
+            <p>Code exampe:</p>
+            <pre class="html"><code> 
+&lt;div class=&quot;sample-3&quot;&gt;
+    &lt;div class=&quot;tabzy-wrapper&quot;&gt;
+        &lt;ul id=&quot;sliding-tabs&quot; class=&quot;tabzy-tabs sliding&quot;&gt;
+            &lt;li&gt;&lt;a href=&quot;#slide1&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#slide2&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#slide3&quot;&gt;Services&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href=&quot;#slide4&quot;&gt;Portfolio&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;div class=&quot;active-line&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;slide1&quot; class=&quot;tabzy-panel&quot;&gt;Welcome to the Home tab!&lt;/div&gt;
+    &lt;div id=&quot;slide2&quot; class=&quot;tabzy-panel&quot; hidden&gt;About us and our mission.&lt;/div&gt;
+    &lt;div id=&quot;slide3&quot; class=&quot;tabzy-panel&quot; hidden&gt;Our services in detail.&lt;/div&gt;
+    &lt;div id=&quot;slide4&quot; class=&quot;tabzy-panel&quot; hidden&gt;Check out our portfolio.&lt;/div&gt;
+&lt;/div&gt;
+            </code></pre>
+            <pre class="javascript"><code>  // Sliding tabs
+const tabs3 = new Tabzy("sliding-tabs", {
+    onChange: updateActiveLine,
+    remberTab: true,
+});
+
+function updateActiveLine() {
+    const activeTab = tabs3.currentTab;
+    const tabLi = activeTab.closest("li");
+    const activeLine = tabs3.container.nextElementSibling;
+
+    activeLine.style.width = `${tabLi.offsetWidth}px`;
+    activeLine.style.transform = `translateX(${tabLi.offsetLeft}px)`;
+}
+
+updateActiveLine();
+            </code></pre>
+            <pre class="css"><code>
+.tabzy-wrapper {
+    position: relative;
+}
+
+.tabzy-tabs {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tabzy-tabs li {
+    position: relative;
+}
+
+.tabzy-tabs a {
+    text-decoration: none;
+    color: #555;
+    padding: 10px 20px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+.tabzy-tabs a:hover {
+    color: var(--primary);
+}
+
+.tabzy-tabs .tabzy--active a {
+    color: var(--primary);
+}
+
+.tabzy-tabs:not(.sliding) .tabzy--active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+}
+
+.active-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.tabzy-panel {
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+}
+            </code></pre>
+
+            <h2 data-bullet="2" class="title" id="installation">Installation</h2>
+            <table class="methods">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th class="w60">Steps</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Direct Download</td>
+                    <td>
+                        <a
+                            href="https://github.com/mycvlnn/Tabzy.js/archive/refs/heads/main.zip"
+                            title="Download Tabzy"
+                        >
+                            Download ZIP
+                        </a>
+                        <p>
+                            Simply extract the ZIP file and use the
+                            <code>tabzy.min.js</code> file in your project.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                Tabzy provides a small Js file that you can include directly via a CDN link. This
+                makes it easy to integrate into your project and customize as needed.
+            </p>
+
+            <p>Include the Tabzy JavaScript file in your project:</p>
+
+            <pre
+                class="html"
+            ><code>&lt;script src=&quot;https://cdn.jsdelivr.net/gh/mycvlnn/Tabzy.js@v1.0.1/tabzy.min.js&quot;&gt;&lt;/script&gt;</code></pre>
+
+            <blockquote>
+                You can use the
+                <a href="https://github.com/mycvlnn/Tabzy.js/releases" target="_blank">released</a>
+                versions of Tabzy available here.
+            </blockquote>
+
+            <h2 data-bullet="3" class="title" id="usage">Usage</h2>
+            <p>Here’s the basic HTML structure you’ll need to set up Tabzy:</p>
+
+            <pre class="html"><code>&lt;ul id=&quot;my-tabs&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#panel1&quot;&gt;Tab 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#panel2&quot;&gt;Tab 2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&quot;panel1&quot;&gt;Content 1&lt;/div&gt;
+&lt;div id=&quot;panel2&quot;&gt;Content 2&lt;/div&gt;</code></pre>
+
+            <p>And here’s how you can use it with JavaScript:</p>
+
+            <pre class="javascript"><code>// Initialize a new tab instance
+const tabs = new Tabzy('my-tabs', {
+    activeClassName: 'tabzy--active',
+    rememberTab: true, // Keeps the active tab in the URL
+    onChange: function({ tab, panel }) {
+        console.log(`Switched to ${tab.textContent}`);
+    }
+});
+
+// Switch to a specific tab
+tabs.switchTab('#panel2');
+
+// Destroy the tab instance
+tabs.destroy();
+</code></pre>
+
+            <h2 data-bullet="4" class="title" id="options">Options</h2>
+            <table class="methods">
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Type</th>
+                        <th class="w60">Description</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>activeClassName</td>
+                    <td>string</td>
+                    <td>
+                        CSS class applied to the active tab (default:
+                        <code>'tabzy--active'</code>)
+                    </td>
+                </tr>
+                <tr>
+                    <td>rememberTab</td>
+                    <td>boolean</td>
+                    <td>
+                        Persists the active tab state in the URL (default:
+                        <code>false</code>)
+                    </td>
+                </tr>
+                <tr>
+                    <td>onChange</td>
+                    <td>function</td>
+                    <td>
+                        A callback function that runs whenever the active tab changes. It receives
+                        an object with two properties:
+                        <code>tab</code> (the DOM element of the newly active tab) and
+                        <code>panel</code> (the DOM element of the corresponding content panel). By
+                        default, it’s set to <code>null</code>, meaning no action is taken unless
+                        you define a function.
+                    </td>
+                </tr>
+            </table>
+
+            <h2 data-bullet="5" class="title" id="api">API</h2>
+            <table class="methods">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th class="w60">Description</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>switchTab(input)</td>
+                    <td>
+                        Switches to a specific tab based on the provided
+                        <code>input</code>. The <code>input</code> can be either: (1) a
+                        <strong>string</strong> representing the <code>href</code> attribute of a
+                        tab (e.g., <code>'#panel2'</code>), or (2) a
+                        <strong>DOM element</strong> that is one of the tab links (e.g., an
+                        <code>&lt;a&gt;</code> element from the tabs list).
+                    </td>
+                </tr>
+                <tr>
+                    <td>destroy()</td>
+                    <td>
+                        Removes all Tabzy functionality, restores the original HTML, and unbinds
+                        events.
+                    </td>
+                </tr>
+            </table>
+
+            <footer class="footer">
+                <p>
+                    This is a small project created to demonstrate tab functionality in vanilla
+                    JavaScript.
+                </p>
+                <p>
+                    Copyright &copy; 2025 by
+                    <a href="https://github.com/mycvlnn" target="_blank"> mycvlnn</a>.
+                </p>
+            </footer>
+        </div>
+        <!-- /CONTAINER -->
+
+        <!-- Highlight code -->
+        <script src="./assets/highlight/highlight.js"></script>
+        <!-- Import lib -->
         <script src="./src/tabzy.js"></script>
+        <script>
+            // Highlight code
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script src="./src/sample.js"></script>
     </body>
 </html>

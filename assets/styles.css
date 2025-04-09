@@ -1,0 +1,164 @@
+/* Reset
+-------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    scroll-behavior: smooth;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6em;
+    line-height: 1.5;
+}
+
+p,
+ul,
+ol,
+dl,
+blockquote,
+pre,
+td,
+th,
+textarea {
+    margin: 1.5em 0;
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+h1,
+.h1-like {
+    margin: 1.4118em 0 0.7059em 0;
+    font-size: 2.125em;
+    line-height: 1.4118;
+}
+
+h2,
+.h2-like {
+    margin: 1.8462em 0 0.9231em 0;
+    font-size: 1.625em;
+    line-height: 1.8462;
+}
+
+h3,
+.h3-like {
+    margin: 2em 0 1em 0;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+h4,
+.h4-like {
+    margin: 2.1818em 0 1.0909em 0;
+    font-size: 1.375em;
+    line-height: 1.0909;
+}
+
+h5,
+.h5-like {
+    margin: 2.4em 0 1.2em 0;
+    font-size: 1.25em;
+    line-height: 1.2;
+}
+
+h6,
+.h6-like {
+    margin: 2.6666em 0 1.3333em 0;
+    font-size: 1.125em;
+    line-height: 1.3333;
+}
+
+.smaller {
+    margin: 2.4em 0 2.4em 0;
+    font-size: 0.625em;
+    line-height: 2.4;
+}
+
+.small {
+    margin: 2em 0 2em 0;
+    font-size: 0.75em;
+    line-height: 2;
+}
+
+.big {
+    margin: 1.3333em 0 1.3333em 0;
+    font-size: 1.125em;
+    line-height: 1.3333;
+}
+
+.bigger {
+    margin: 1.2em 0 1.2em 0;
+    font-size: 1.25em;
+    line-height: 1.2;
+}
+
+.biggest {
+    margin: 1.0909em 0 1.0909em 0;
+    font-size: 1.375em;
+    line-height: 1.0909;
+}
+
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+    margin-top: 0;
+}
+
+p:last-child,
+ul:last-child,
+ol:last-child,
+dl:last-child,
+blockquote:last-child,
+pre:last-child,
+table:last-child {
+    margin-bottom: 0;
+}
+
+li p,
+li ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+textarea,
+table,
+td,
+th,
+code,
+pre,
+samp,
+div,
+p {
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+}
+
+code,
+pre,
+samp {
+    white-space: pre-wrap;
+    font-family: consolas, "DejaVu Sans Mono", courier, monospace;
+}
+
+code {
+    line-height: 1;
+    font-size: 15px;
+}
+
+table {
+    margin-bottom: 1.5em;
+}

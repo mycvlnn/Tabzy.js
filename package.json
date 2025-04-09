@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "minify": "csso src/tabzy.css -o tabzy.min.css && terser src/tabzy.js -o tabzy.min.js"
+        "minify": "terser src/tabzy.js -o tabzy.min.js"
     },
     "dependencies": {
         "csso-cli": "^4.0.2",

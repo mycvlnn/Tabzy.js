@@ -134,17 +134,3 @@ function Tabzy(selector, options) {
 
     this._init();
 }
-
-const tabzy = new Tabzy("tabs", {
-    remberTab: true,
-    onChange: slideLine,
-});
-
-function slideLine() {
-    const currentTabActive = tabzy.currentTab;
-    const tabLine = tabzy.container.nextElementSibling;
-    tabLine.style.width = currentTabActive.offsetWidth + "px";
-    tabLine.style.left = currentTabActive.offsetLeft + "px";
-}
-
-slideLine();
